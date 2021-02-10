@@ -1,0 +1,12 @@
+pwn/sourceless rust wasm pwn
+poortho
+3 solves / 458 points
+I hope you like sourceless rust wasm pwn!
+
+Haha, just kidding, here's the source.
+
+... what, did you think the other part was a joke too?
+
+Run with wasmtime ./wasmpwn.wasm --dir ./
+
+nc dicec.tf 31798
