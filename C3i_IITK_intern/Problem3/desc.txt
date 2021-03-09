@@ -1,0 +1,9 @@
+Problem statement –
+1. This homework requires to inspect the reports generated on each individual
+malware and then answer the questions in a typed (using MS word or latex)
+form, generate a pdf file and revert it. Download the zip file from Git-Link
+and extract the two directories – malware and Benign. Submit each file
+individually to atleast 4 open tools like VirusTotal that you must search on
+web – and get all the reports and compare them. Finally, describe the
+conclusive Indicators of Compromise (IOCs).
+Git-link - GitHub - nkcool5/project2

@@ -1,0 +1,28 @@
+Problem Statement: Write a Python code to read a file (input.txt) containing a list of URLs and
+then read files from an URL and do some processing as mentioned further on the file data. A user
+reads from a URL should be a JSON file; else, the program should give an output warning stating
+that the “file is not a JSON file” and exit. The code should only consider proper/standard URLs as
+an input, and if it is not a valid URL, then the program should give an output warning stating that
+the “URL is incorrect” and exit. The JSON file which the code will read has a standard format --
+Student name:
+Score in subject 1: _
+Score in subject 2:_
+.
+.
+Score in subject 10:_
+with an overall grade in the semester as a label - Exceptional, Very Good, Good, Fair, and Poor. The
+user has to apply any feature reduction algorithm like PCA and then perform classification into
+these classes ( Exceptional, Very Good, Good, Fair, and Poor). And also mention accuracy and the
+False Positive Rate (FPR) using cross-validation.
+Final deliverables:
+1. Python code named as “program.py”
+2. A text file containing named as “output.txt” accuracy and the False Positive Rate (FPR)
+using cross-validation for your model.
+Evaluation criteria:
+We will test your code on the unlabeled student data. Your code should take the input file that
+contains testing URLs as a command-line argument, and the output should be in a CSV file.
+Example -
+Command Line - $ python program.py "input.txt"
+Predicted Output in CSV:
+StudentName1, Good
+StudentName2, Poor
