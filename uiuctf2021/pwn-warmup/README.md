@@ -64,8 +64,11 @@ For example, p32(0x41424344) gives "\x44\x43\x42\x41". Other function names are 
 
 If you are reading this writeup, these are few resources that might be helpful to you:
 
-##Resources
+## Resources
 [Nightmare](https://github.com/guyinatuxedo/nightmare)
+
 [Intro-X86](https://opensecuritytraining.info/IntroX86.html)
+
 [Exploits1](https://opensecuritytraining.info/Exploits1.html)
+
 [pwn.college](https://pwn.college/)
