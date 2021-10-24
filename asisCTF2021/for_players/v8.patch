@@ -1,0 +1,29 @@
+diff --git a/src/builtins/builtins-typed-array.cc b/src/builtins/builtins-typed-array.cc
+index a7827e7d9f..f4fac1e169 100644
+--- a/src/builtins/builtins-typed-array.cc
++++ b/src/builtins/builtins-typed-array.cc
+@@ -68,7 +68,7 @@ BUILTIN(TypedArrayPrototypeCopyWithin) {
+           isolate, num, Object::ToInteger(isolate, args.at<Object>(2)));
+       from = CapRelativeIndex(num, 0, len);
+ 
+-      Handle<Object> end = args.atOrUndefined(isolate, 3);
++     Handle<Object> end = args.atOrUndefined(isolate, 3);
+       if (!end->IsUndefined(isolate)) {
+         ASSIGN_RETURN_FAILURE_ON_EXCEPTION(isolate, num,
+                                            Object::ToInteger(isolate, end));
+@@ -80,15 +80,6 @@ BUILTIN(TypedArrayPrototypeCopyWithin) {
+   int64_t count = std::min<int64_t>(final - from, len - to);
+   if (count <= 0) return *array;
+ 
+-  // TypedArray buffer may have been transferred/detached during parameter
+-  // processing above.
+-  if (V8_UNLIKELY(array->WasDetached())) {
+-    THROW_NEW_ERROR_RETURN_FAILURE(
+-        isolate, NewTypeError(MessageTemplate::kDetachedOperation,
+-                              isolate->factory()->NewStringFromAsciiChecked(
+-                                  method_name)));
+-  }
+-
+   if (V8_UNLIKELY(array->is_backed_by_rab())) {
+     bool out_of_bounds = false;
+     int64_t new_len = array->GetLengthOrOutOfBounds(out_of_bounds);

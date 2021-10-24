@@ -1,0 +1,33 @@
+diff --git a/base/allocator/partition_allocator/partition_alloc_config.h b/base/allocator/partition_allocator/partition_alloc_config.h
+index 39db88ae2f044..5e66ddf9309fb 100644
+--- a/base/allocator/partition_allocator/partition_alloc_config.h
++++ b/base/allocator/partition_allocator/partition_alloc_config.h
+@@ -111,7 +111,7 @@ static_assert(sizeof(void*) != 8, "");
+ // on any big endian architecture as well.
+ #if !BUILDFLAG(PUT_REF_COUNT_IN_PREVIOUS_SLOT) && \
+     defined(ARCH_CPU_LITTLE_ENDIAN)
+-#define PA_HAS_FREELIST_HARDENING
++
+ #endif
+ 
+ // Specifies whether allocation extras need to be added.
+diff --git a/base/allocator/partition_allocator/partition_root.h b/base/allocator/partition_allocator/partition_root.h
+index 6ccb945bb6c16..f27d2d1dd3815 100644
+--- a/base/allocator/partition_allocator/partition_root.h
++++ b/base/allocator/partition_allocator/partition_root.h
+@@ -1140,12 +1140,12 @@ ALWAYS_INLINE void PartitionRoot<thread_safe>::FreeNoHooksImmediate(
+ 
+   // memset() can be really expensive.
+ #if EXPENSIVE_DCHECKS_ARE_ON()
+-  memset(slot_start, kFreedByte,
+-         slot_span->GetUtilizedSlotSize()
++  //memset(slot_start, kFreedByte,
++  //       slot_span->GetUtilizedSlotSize()
+ #if BUILDFLAG(PUT_REF_COUNT_IN_PREVIOUS_SLOT)
+              - sizeof(internal::PartitionRefCount)
+ #endif
+-  );
++//  );
+ #elif defined(PA_ZERO_RANDOMLY_ON_FREE)
+   // `memset` only once in a while: we're trading off safety for time
+   // efficiency.
