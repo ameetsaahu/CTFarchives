@@ -1,0 +1,59 @@
+#!/bin/sh
+
+/bin/busybox --install -s /bin
+
+# stty raw -echo
+
+[ -d /dev ] || mkdir -m 0755 /dev
+[ -d /sys ] || mkdir /sys
+[ -d /proc ] || mkdir /proc
+[ -d /tmp ] || mkdir /tmp
+[ -d /run ] || mkdir /run
+[ -d /root ] || mkdir /root
+[ -d /etc ] || mkdir /etc
+[ -d /home ] || mkdir /home
+
+echo 'root:x:0:0:root:/root:/bin/sh' > /etc/passwd
+echo 'root:x:0:' > /etc/group
+echo 'n00b:x:1000:1000:n00b:/home/n00b:/bin/sh' >> /etc/passwd
+echo 'n00b:x:1000:' >> /etc/group
+
+mkdir -p /home/n00b
+
+# adduser n00b --disabled-password
+
+chmod 644 /etc/passwd
+chmod 644 /etc/group
+
+
+chown -R 0:0 /
+chmod 700 -R /root
+chown n00b:n00b /home/n00b
+chmod 777 /home/n00b
+chmod 755 /dev
+
+mkdir -p /var/lock
+mount -t sysfs -o nodev,noexec,nosuid sysfs /sys
+mount -t proc -o nodev,noexec,nosuid proc /proc
+ln -sf /proc/mounts /etc/mtab
+mount -t devtmpfs -o nosuid,mode=0755 udev /dev
+mkdir -p /dev/pts
+mount -t devpts -o noexec,nosuid,gid=5,mode=0620 devpts /dev/pts || true
+mount -t tmpfs -o "noexec,nosuid,size=10%,mode=0755" tmpfs /run
+
+echo 1 > /proc/sys/kernel/perf_event_paranoid
+
+# insmod like.ko
+insmod notes.ko
+
+# mknod /dev/like c 489 0
+mknod /dev/notes c 489 0
+
+# chmod 666 /dev/like
+chmod 666 /dev/notes
+
+su n00b -c sh
+#su root -c sh
+
+poweroff -f
+
